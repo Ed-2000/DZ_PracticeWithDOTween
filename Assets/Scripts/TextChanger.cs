@@ -12,24 +12,10 @@ public class TextChanger : MonoBehaviour
     private void Start()
     {
         _text = GetComponent<Text>();
+        Sequence sequence = DOTween.Sequence();
 
-        ChangeText1();
-        Invoke(nameof(ChangeText2), _duration);
-        Invoke(nameof(ChangeText3), _duration + _duration);
-    }
-
-    private void ChangeText1()
-    {
-        _text.DOText("qwertyuiop[]", _duration);
-    }
-
-    private void ChangeText2()
-    {
-        _text.DOText("asdfghjkl;'", _duration).SetRelative();
-    }
-
-    private void ChangeText3()
-    {
-        _text.DOText("zxcvbnm,./", _duration, true, ScrambleMode.All);
+        sequence.Append(_text.DOText("qwertyuiop[]", _duration));
+        sequence.Append(_text.DOText("asdfghjkl;'", _duration).SetRelative());
+        sequence.Append(_text.DOText("zxcvbnm,./", _duration, true, ScrambleMode.All));
     }
 }
